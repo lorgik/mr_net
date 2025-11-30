@@ -1,8 +1,13 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
 import Container from "./Container"
+import { useState } from "react"
 
 export default function Header() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
+
     const navLinks = [
         { href: "#", label: "Технология" },
         { href: "#platform", label: "Платформа управления" },
@@ -11,37 +16,112 @@ export default function Header() {
         { href: "#contact", label: "Оставить заявку", isAccent: true },
     ]
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen)
+    }
+
+    const closeMenu = () => {
+        setIsMenuOpen(false)
+    }
+
     return (
-        <header className="fixed z-10 w-full bg-black">
-            <Container className="pt-[36px] pb-[58px] flex items-end gap-[40px]">
-                <div className="flex items-end gap-[56px] text-[12px]">
-                    <Link href={"/"}>
-                        <Image src={"/logo.svg"} alt="mr net" width={185} height={41} />
+        <header className="fixed z-50 w-full bg-black">
+            <Container className="py-[36px] flex items-end justify-between gap-[40px] max-xl:items-center max-xl:py-[20px]">
+                <div className="flex items-end gap-[56px] text-[12px] max-xl:items-center max-xl:gap-[12px] max-xl:flex-col max-xl:h-auto">
+                    <Link href="/" onClick={closeMenu}>
+                        <Image
+                            src="/logo.svg"
+                            alt="mr net"
+                            width={185}
+                            height={41}
+                            className="max-lg:w-[163px]"
+                            priority
+                        />
                     </Link>
                     <Link
-                        href={"tel:+ 7 (800) 600-35-38"}
-                        className="text-[var(--accent-2)] border-black border-b hover:border-[var(--accent-2)] transition flex-shrink-0"
+                        href="tel:+7800600-35-38"
+                        className="text-[var(--accent-2)] border-b border-transparent hover:border-[var(--accent-2)] transition flex-shrink-0 max-lg:text-[14px]"
+                        onClick={closeMenu}
                     >
-                        + 7 (800) 600-35-38
+                        +7 (800) 600-35-38
                     </Link>
                 </div>
 
-                <ul className="flex items-center gap-[40px] ml-auto text-[12px] uppercase">
-                    {navLinks.map((link, index) => (
-                        <li key={index} className="flex-shrink-0">
-                            <Link
-                                href={link.href}
-                                className={`border-black border-b transition ${
-                                    link.isAccent
-                                        ? "text-[var(--accent-2)] hover:border-[var(--accent-2)]"
-                                        : "hover:border-white"
-                                }`}
-                            >
-                                {link.label}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
+                {/* Кнопка бургер-меню */}
+                <div className="hidden max-lg:block z-60">
+                    <button
+                        onClick={toggleMenu}
+                        className="text-white focus:outline-none relative z-60"
+                        aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
+                        aria-expanded={isMenuOpen}
+                    >
+                        {isMenuOpen ? (
+                            <Image
+                                src="/menu-cross.svg"
+                                alt="Закрыть меню"
+                                width={24}
+                                height={24}
+                                className="relative z-60"
+                            />
+                        ) : (
+                            <Image src="/burger.svg" alt="Открыть меню" width={24} height={24} />
+                        )}
+                    </button>
+                </div>
+
+                {/* Десктопная навигация */}
+                <nav className="flex items-center gap-[40px] ml-auto text-[12px] uppercase max-lg:hidden">
+                    <ul className="flex items-center gap-[40px]">
+                        {navLinks.map((link, index) => (
+                            <li key={index} className="flex-shrink-0">
+                                <Link
+                                    href={link.href}
+                                    className={`border-b border-transparent transition ${
+                                        link.isAccent
+                                            ? "text-[var(--accent-2)] hover:border-[var(--accent-2)]"
+                                            : "text-white hover:border-white"
+                                    }`}
+                                >
+                                    {link.label}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+
+                {/* Мобильное меню */}
+                {isMenuOpen && (
+                    <div className="fixed inset-0 bg-black z-40 pt-[120px] px-4 lg:hidden">
+                        <nav className="flex flex-col items-center gap-[20px] text-[16px] uppercase w-full">
+                            <ul className="flex flex-col items-center gap-[20px] w-full">
+                                {navLinks.map((link, index) => (
+                                    <li key={index} className="w-full text-center py-2">
+                                        <Link
+                                            href={link.href}
+                                            className={`block w-full py-2 border-b border-transparent transition ${
+                                                link.isAccent
+                                                    ? "text-[var(--accent-2)] hover:border-[var(--accent-2)]"
+                                                    : "text-white hover:border-white"
+                                            }`}
+                                            onClick={closeMenu}
+                                        >
+                                            {link.label}
+                                        </Link>
+                                    </li>
+                                ))}
+                                <li className="w-full text-center py-2 mt-4">
+                                    <Link
+                                        href="tel:+7800600-35-38"
+                                        className="block w-full text-[var(--accent-2)] border-b border-transparent hover:border-[var(--accent-2)] transition py-2"
+                                        onClick={closeMenu}
+                                    >
+                                        +7 (800) 600-35-38
+                                    </Link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                )}
             </Container>
         </header>
     )

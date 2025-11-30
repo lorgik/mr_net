@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { ArrowLeft } from "@/public/icons/ArrowLeft"
 import { ArrowRight } from "@/public/icons/ArrowRight"
 
@@ -36,19 +36,42 @@ const reviews = [
         name: "Тараканов Михаил",
         position: "Руководитель",
         department: "СИТ АО «Подмосковья»",
-        text: "У нас много торговых точек, и стабильный интернет — постоянная проблема. Мы пробовали разные решения, но это только усложняло ситуацию, добавляя путаницу со счетами с увеличением количества контрагентов. С mrnet мы смогли упорядочить документооборот и организовать управление оборудованием в одном удобном личном кабинете. Оперативная техническая поддержка стала для нас надежным помощником. Теперь более 150 наших точек продаж используют mrnet как основной канал связи, и это только начало!",
+        text: "У нас много торговых точек, и стабильный интернет — постоянная проблема. Мы пробовали разные решения, но это только усложняла ситуацию, добавляя путаницу со счетами с увеличением количества контрагентов. С mrnet мы смогли упорядочить документооборот и организовать управление оборудованием в одном удобном личном кабинете. Оперативная техническая поддержка стала для нас надежным помощником. Теперь более 150 наших точек продаж используют mrnet как основной канал связи, и это только начало!",
     },
 ]
 
 export default function Slider() {
     const [activeIndex, setActiveIndex] = useState(0)
+    const [slideWidth, setSlideWidth] = useState(563) // ширина по умолчанию
+    const sliderRef = useRef<HTMLDivElement>(null)
+    const slidesRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        const updateSlideWidth = () => {
+            if (slidesRef.current && slidesRef.current.children.length > 0) {
+                const firstSlide = slidesRef.current.children[0] as HTMLElement
+                const newWidth = firstSlide.offsetWidth
+                setSlideWidth(newWidth)
+            }
+        }
+
+        // Обновляем ширину при монтировании
+        updateSlideWidth()
+
+        // Обновляем при изменении размера окна
+        window.addEventListener("resize", updateSlideWidth)
+
+        return () => {
+            window.removeEventListener("resize", updateSlideWidth)
+        }
+    }, [])
 
     const nextSlide = () => {
-        setActiveIndex((prev) => (prev + 1) % (reviews.length - 1))
+        setActiveIndex((prev) => (prev + 1) % reviews.length)
     }
 
     const prevSlide = () => {
-        setActiveIndex((prev) => (prev - 1 + reviews.length - 1) % (reviews.length - 1))
+        setActiveIndex((prev) => (prev - 1 + reviews.length) % reviews.length)
     }
 
     const goToSlide = (index: number) => {
@@ -57,39 +80,44 @@ export default function Slider() {
 
     return (
         <div className="relative mt-[34px]">
-            <div className="flex gap-[12px] w-max">
-                {reviews.map((testimonial, index) => (
-                    <div
-                        key={testimonial.id}
-                        className={
-                            "flex flex-col gap-[24px] justify-between bg-gradient-2 flex-shrink-0 max-w-[563px] h-[360px] transition-transform duration-500 rounded-[8px] p-[20px] text-white border border-[var(--accent-2)]"
-                        }
-                        style={{
-                            transform: `translateX(-${activeIndex * (563 + 12)}px)`, // 563px + 12px gap,
-                        }}
-                    >
-                        <div className="flex justify-between items-start mb-[12px] text-[14px]">
-                            <div className="text-[var(--accent-2)]">
-                                <h3 className="font-medium">{testimonial.client}</h3>
-                                <p>{testimonial.name}</p>
+            <div ref={sliderRef} className="">
+                <div
+                    ref={slidesRef}
+                    className="flex gap-[12px] transition-transform duration-500 ease-in-out"
+                    style={{
+                        transform: `translateX(-${activeIndex * (slideWidth + 12)}px)`,
+                    }}
+                >
+                    {reviews.map((testimonial) => (
+                        <div
+                            key={testimonial.id}
+                            className="flex-shrink-0 w-full max-w-[90vw] sm:max-w-[90vw] md:max-w-[600px] lg:max-w-[563px] h-[360px] bg-gradient-2 rounded-[8px] p-[20px] text-white border border-[var(--accent-2)] flex flex-col gap-[24px] justify-between overflow-hidden"
+                        >
+                            <div className="flex justify-between items-start mb-[12px] text-[14px]">
+                                <div className="text-[var(--accent-2)]">
+                                    <h3 className="font-medium">{testimonial.client}</h3>
+                                    <p>{testimonial.name}</p>
+                                </div>
+                                <div>
+                                    <p>{testimonial.position}</p>
+                                    <p>{testimonial.department}</p>
+                                </div>
                             </div>
-                            <div>
-                                <p>{testimonial.position}</p>
-                                <p>{testimonial.department}</p>
+                            <p className="text-[16px] overflow-hidden overflow-ellipsis line-clamp-6">
+                                {testimonial.text}
+                            </p>
+                            <div className="mt-auto flex justify-end">
+                                <Image src="/arrow-down.svg" alt="arrow" width={20} height={20} />
                             </div>
                         </div>
-                        <p className="text-[16px]">{testimonial.text}</p>
-                        <div className="mt-[12px] flex justify-end">
-                            <Image src="/arrow-down.svg" alt="arrow" width={20} height={20} />
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
 
             <div className="flex justify-between items-center mt-[34px]">
                 <button
                     onClick={prevSlide}
-                    className="flex justify-center items-center border border-[var(--accent-2)] rounded-full w-[52px] h-[52px]"
+                    className="transition flex justify-center items-center border border-[var(--accent-2)] rounded-full w-[52px] h-[52px] hover:shadow-[0px_0px_5px_3px_rgba(0,228,240,0.6)]"
                 >
                     <ArrowLeft />
                 </button>
@@ -97,7 +125,7 @@ export default function Slider() {
                 <div className="flex gap-[16px]">
                     {reviews.map(
                         (_, index) =>
-                            index !== reviews.length - 1 && (
+                            index !== reviews.length && (
                                 <button
                                     key={index}
                                     onClick={() => goToSlide(index)}
@@ -111,7 +139,7 @@ export default function Slider() {
 
                 <button
                     onClick={nextSlide}
-                    className="flex justify-center items-center border border-[var(--accent-2)] rounded-full w-[52px] h-[52px]"
+                    className="transition flex justify-center items-center border border-[var(--accent-2)] rounded-full w-[52px] h-[52px] hover:shadow-[0px_0px_5px_3px_rgba(0,228,240,0.6)]"
                 >
                     <ArrowRight />
                 </button>

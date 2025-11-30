@@ -9,8 +9,8 @@ export default function SolutionSection() {
         <section>
             <Container className="pt-[75px]">
                 <Title className="max-w-[700px]">Решение, созданное айтишниками для айтишников</Title>
-                <div className="flex gap-[12px] mt-[34px]">
-                    <div className="flex flex-col justify-between flex-1 bg-gradient-1 rounded-[8px] border border-[var(--accent-1)] p-[20px] min-h-[308px]">
+                <div className="flex gap-[12px] mt-[34px] max-lg:flex-col">
+                    <div className="flex flex-col justify-between gap-[24px] flex-1 bg-gradient-1 rounded-[8px] border border-[var(--accent-1)] p-[20px] min-h-[308px]">
                         <h3 className="text-[26px]">Ценим ваше время</h3>
                         <p className="text-[18px]">
                             Подключите мультироутер с быстрым интернетом всего за 7 минут. Наши устройства работают по
@@ -21,7 +21,7 @@ export default function SolutionSection() {
                             провайдерами
                         </p>
                     </div>
-                    <div className="flex flex-col justify-between flex-1 bg-gradient-1 rounded-[8px] border border-[var(--accent-1)] p-[20px] min-h-[308px]">
+                    <div className="flex flex-col justify-between gap-[24px] flex-1 bg-gradient-1 rounded-[8px] border border-[var(--accent-1)] p-[20px] min-h-[308px]">
                         <h3 className="text-[26px]">Безграничные Возможности</h3>
                         <p className="text-[18px]">
                             Подберём оборудование для новых точек и оперативно подключим к интернету по любому адресу.
@@ -30,7 +30,7 @@ export default function SolutionSection() {
                             Всё это — без необходимости заключения дополнительных контрактов
                         </p>
                     </div>
-                    <div className="flex flex-col justify-between flex-1 bg-gradient-1 rounded-[8px] border border-[var(--accent-1)] p-[20px] min-h-[308px]">
+                    <div className="flex flex-col justify-between gap-[24px] flex-1 bg-gradient-1 rounded-[8px] border border-[var(--accent-1)] p-[20px] min-h-[308px]">
                         <h3 className="text-[26px]">Индивидуальный подход</h3>
                         <p className="text-[18px]">
                             Мы всегда идем навстречу клиенту, предлагая оптимальное по стоимости решение.
@@ -41,9 +41,11 @@ export default function SolutionSection() {
                     </div>
                 </div>
 
-                <div className="flex gap-[12px] mt-[12px]">
+                <div className="flex gap-[12px] mt-[12px] max-lg:flex-col">
                     <div className="flex flex-col gap-[24px] justify-between bg-gradient-3 text-black rounded-[8px] p-[20px] flex-1">
-                        <p className="text-[45px] font-medium uppercase text-balance">Попробуйте 14 дней бесплатно</p>
+                        <p className="text-[45px] font-medium uppercase text-balance max-sm:text-[35px]">
+                            Попробуйте 14 дней бесплатно
+                        </p>
                         <p className="text-[24px]">
                             Развивайте свою инфру с <span className="font-medium">mrnet</span>. Без лишних затрат и
                             костылей. Высокоскоростной интернет — удобно, эффективно!
@@ -54,7 +56,7 @@ export default function SolutionSection() {
                         alt="роутер"
                         width={678}
                         height={398}
-                        className="rounded-[8px] flex-1"
+                        className="rounded-[8px] flex-1 max-xl:w-[486px] max-lg:w-full max-lg:order-first"
                     />
                 </div>
 

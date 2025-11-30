@@ -9,7 +9,7 @@ export default function MonitoringSection() {
         <section id="platform">
             <Container className="pt-[75px]">
                 <Title>Настраивайте сеть и управляйте всеми устройствами через единый личный кабинет</Title>
-                <div className="mt-[34px] grid grid-cols-[563fr_793fr] gap-[12px] w-full">
+                <div className="mt-[34px] grid grid-cols-[563fr_793fr] gap-[12px] w-full max-lg:flex max-lg:flex-col">
                     <div className="flex flex-col justify-between min-h-[220px] bg-gradient-2 rounded-[8px] border border-[var(--accent-2)] p-[20px]">
                         <h3 className="text-[26px]">мониторинг</h3>
                         <p className="text-[18px]">
@@ -24,7 +24,7 @@ export default function MonitoringSection() {
                         alt="мониторинг"
                         width={793}
                         height={452}
-                        className="row-span-2 w-full rounded-[8px]"
+                        className="row-span-2 w-full h-full rounded-[8px] max-lg:order-last"
                     />
                     <div className="flex flex-col justify-between min-h-[220px] bg-gradient-2 rounded-[8px] border border-[var(--accent-2)] p-[20px]">
                         <h3 className="text-[26px]">тонкая настройка</h3>

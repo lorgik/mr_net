@@ -30,7 +30,7 @@ export default function FeatureGrid() {
     ]
 
     return (
-        <Container className="flex gap-[12px] uppercase text-balance text-[20px]">
+        <div className="flex gap-[12px] uppercase text-balance text-[20px] max-lg:flex-col">
             {features.map((feature) => (
                 <FeatureCard
                     key={feature.id}
@@ -41,6 +41,6 @@ export default function FeatureGrid() {
                     title={feature.title}
                 />
             ))}
-        </Container>
+        </div>
     )
 }

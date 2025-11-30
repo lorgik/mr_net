@@ -13,9 +13,9 @@ export default function Banner() {
     ]
 
     return (
-        <div className="flex gap-[12px]">
+        <div className="flex gap-[12px] max-lg:flex-col">
             <div className="flex flex-col gap-[20px] flex-[793] rounded-[8px] bg-gradient-1 border border-[var(--accent-1)] p-[20px]">
-                <h1 className="text-[50px]">Беспроводной интернет для бизнеса</h1>
+                <h1 className="text-[50px] max-sm:text-[35px]">Беспроводной интернет для бизнеса</h1>
                 <p className="text-[26px] text-balance uppercase">
                     от <span className="font-medium">2 990</span> рублей* в месяц! Установка по любому адресу в РФ!
                 </p>
@@ -34,7 +34,7 @@ export default function Banner() {
                     от модели мультироутера
                 </p>
             </div>
-            <div className="flex-[563] bg-[url(/main-bg.jpg)] bg-no-repeat bg-center bg-cover w-full rounded-[8px]"></div>
+            <div className="flex-[563] bg-[url(/main-bg.jpg)] bg-no-repeat bg-center bg-cover w-full rounded-[8px] min-h-[370px] max-md:min-h-[270px] max-lg:order-first"></div>
         </div>
     )
 }

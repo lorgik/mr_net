@@ -28,7 +28,7 @@ export default function ContactForm() {
             />
             <ConsentCheckbox required={true} />
             <span className="text-[var(--neutral)] text-[12px]">* Поля, обязательные для заполнения</span>
-            <Button href="#" variant="gradient" className="mt-[12px]">
+            <Button variant="gradient" className="mt-[12px]">
                 Начать!
             </Button>
         </form>

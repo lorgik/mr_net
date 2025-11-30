@@ -5,7 +5,7 @@ import Image from "next/image"
 export default function ComparisonSection() {
     return (
         <section>
-            <Container className="flex pt-[75px] gap-[12px]">
+            <Container className="flex pt-[75px] gap-[12px] max-md:flex-col max-md:gap-[34px]">
                 <div className="flex-1">
                     <Title>не балансируем</Title>
                     <Image

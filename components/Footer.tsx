@@ -19,11 +19,11 @@ export default function Footer() {
     ]
 
     return (
-        <footer className="bg-[url(/footer-bg.png)] bg-no-repeat bg-position-[100%_100%] bg-size-[25.5%]">
+        <footer className="bg-[url(/footer-bg.png)] bg-no-repeat bg-position-[100%_100%] bg-size-[25.5%] max-2xl:bg-size-[20%] max-xl:bg-size-[15% max-lg:bg-size-[40%]">
             <Container className="py-[75px]">
                 <h4 className="text-[20px]">Дефолтный подвал</h4>
-                <div className="mt-[34px] flex gap-[75px] text-[12px]">
-                    <div className="flex flex-col max-w-[333px]">
+                <div className="mt-[34px] flex gap-[75px] text-[12px] max-lg:flex-wrap max-lg:gap-[34px]">
+                    <div className="flex flex-col max-w-[333px] gap-[20px] max-lg:order-last">
                         <p>
                             ООО «Ньюком Дистрибьюшн»,ОГРН: 1207700420784,Юридический адрес: 119017, Российская
                             Федерация, г. Москва, ул. Большая Ордынка, д. 54 стр. 2
@@ -31,7 +31,7 @@ export default function Footer() {
                         <Link href={"/"} className="mt-auto">
                             <Image src="logo.svg" alt="mr net" width={185} height={41} />
                         </Link>
-                        <h4 className="text-[12px] mt-[20px]">КАТЕГОРИЧЕСКИ НОВЫЙ ИНТЕРНЕТ ДЛЯ БИЗНЕСА</h4>
+                        <h4 className="text-[12px]">КАТЕГОРИЧЕСКИ НОВЫЙ ИНТЕРНЕТ ДЛЯ БИЗНЕСА</h4>
                     </div>
                     <div className="max-w-[333px] flex flex-col gap-[5px]">
                         <span>

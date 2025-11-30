@@ -5,7 +5,7 @@ import FeatureGrid from "@/components/home/FeatureGrid"
 export default function MainSection() {
     return (
         <main>
-            <Container className="pt-[136px] flex flex-col gap-[12px]">
+            <Container className="pt-[var(--header-height)] flex flex-col gap-[12px]">
                 <Banner />
                 <FeatureGrid />
             </Container>
