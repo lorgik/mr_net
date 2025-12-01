@@ -1,5 +1,5 @@
 import Container from "@/components/Container"
-import Slider from "./Slider"
+import ReviewsSlider from "./ReviewsSlider"
 import Title from "@/ui/Title"
 
 export default function TestimonialsSection() {
@@ -9,7 +9,7 @@ export default function TestimonialsSection() {
                 <Title>
                     95% клиентов выбирают <span className="font-medium lowercase">mrnet</span> после тест-драйва
                 </Title>
-                <Slider />
+                <ReviewsSlider />
             </Container>
         </section>
     )

@@ -40,7 +40,7 @@ const reviews = [
     },
 ]
 
-export default function Slider() {
+export default function ReviewsSlider() {
     const [activeIndex, setActiveIndex] = useState(0)
     const [slideWidth, setSlideWidth] = useState(563) // ширина по умолчанию
     const sliderRef = useRef<HTMLDivElement>(null)
@@ -93,7 +93,7 @@ export default function Slider() {
                             key={testimonial.id}
                             className="flex-shrink-0 w-full max-w-[90vw] sm:max-w-[90vw] md:max-w-[600px] lg:max-w-[563px] h-[360px] bg-gradient-2 rounded-[8px] p-[20px] text-white border border-[var(--accent-2)] flex flex-col gap-[24px] justify-between overflow-hidden"
                         >
-                            <div className="flex justify-between items-start mb-[12px] text-[14px]">
+                            <div className="flex justify-between gap-[24px] items-start mb-[12px] text-[14px]">
                                 <div className="text-[var(--accent-2)]">
                                     <h3 className="font-medium">{testimonial.client}</h3>
                                     <p>{testimonial.name}</p>
