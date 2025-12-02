@@ -2,7 +2,6 @@ import Container from "@/components/Container"
 import Title from "@/ui/Title"
 import Button from "@/ui/Button"
 import Image from "next/image"
-import Link from "next/link"
 
 export default function MonitoringSection() {
     return (

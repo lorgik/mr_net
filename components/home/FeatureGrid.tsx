@@ -2,8 +2,8 @@
 
 import FeatureCard from "./FeatureCard"
 import { useState } from "react"
-import { ArrowLeft } from "@/public/icons/ArrowLeft"
-import { ArrowRight } from "@/public/icons/ArrowRight"
+import { ArrowLeft } from "@/icons/ArrowLeft"
+import { ArrowRight } from "@/icons/ArrowRight"
 
 export default function FeatureGrid() {
     const features = [

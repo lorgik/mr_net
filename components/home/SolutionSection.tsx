@@ -5,8 +5,8 @@ import Title from "@/ui/Title"
 import Button from "@/ui/Button"
 import Image from "next/image"
 import { useState } from "react"
-import { ArrowLeft } from "@/public/icons/ArrowLeft"
-import { ArrowRight } from "@/public/icons/ArrowRight"
+import { ArrowLeft } from "@/icons/ArrowLeft"
+import { ArrowRight } from "@/icons/ArrowRight"
 
 export default function SolutionSection() {
     const benefits = [

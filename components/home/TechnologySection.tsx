@@ -1,7 +1,6 @@
 import Container from "@/components/Container"
 import Button from "@/ui/Button"
 import Title from "@/ui/Title"
-import Image from "next/image"
 
 export default function TechnologySection() {
     return (

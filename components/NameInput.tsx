@@ -1,24 +1,29 @@
 interface NameInputProps {
     value: string
     onChange: (value: string) => void
+    isSubmitted: boolean
 }
 
-export default function NameInput({ value, onChange }: NameInputProps) {
+export default function NameInput({ value, onChange, isSubmitted }: NameInputProps) {
+    const hasError = isSubmitted && !value.trim()
+    const borderClass = hasError ? "border-[var(--accent-1)]" : "border-[var(--accent-2)]"
+
     return (
         <input
             type="text"
             name="name"
             value={value}
-            onChange={(e) => {
-                onChange(e.target.value)
-                e.target.setCustomValidity("")
-            }}
+            onChange={(e) => onChange(e.target.value)}
             placeholder="Ваше имя *"
-            className="py-[12px] px-[24px] bg-black rounded-full border border-[var(--accent-2)] w-full"
+            className={`
+                w-full
+                px-[24px] py-[12px]
+                bg-black rounded-full border
+                transition-colors duration-200
+                ${borderClass}
+                focus:outline-none focus:border-[var(--accent-2)]
+            `}
             required
-            onInvalid={(e) => {
-                e.currentTarget.setCustomValidity("Пожалуйста, введите имя")
-            }}
         />
     )
 }

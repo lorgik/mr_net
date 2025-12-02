@@ -1,32 +1,23 @@
+// src/components/Header.tsx
 "use client"
 
 import Link from "next/link"
 import Image from "next/image"
 import Container from "./Container"
 import { useState } from "react"
+import MobileMenu from "./MobileMenu"
+import { navLinks } from "@/data/navLinks"
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-    const navLinks = [
-        { href: "#", label: "Технология" },
-        { href: "#platform", label: "Платформа управления" },
-        { href: "#", label: "Тест-драйв" },
-        { href: "#net", label: "Наша сеть" },
-        { href: "#contact", label: "Оставить заявку", isAccent: true },
-    ]
-
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen)
-    }
-
-    const closeMenu = () => {
-        setIsMenuOpen(false)
-    }
+    const toggleMenu = () => setIsMenuOpen((prev) => !prev)
+    const closeMenu = () => setIsMenuOpen(false)
 
     return (
         <header className="fixed z-50 w-full bg-black">
             <Container className="py-[36px] flex items-end justify-between gap-[40px] max-xl:items-center max-xl:py-[20px]">
+                {/* Логотип и телефон */}
                 <div className="flex items-end gap-[56px] text-[12px] max-xl:items-center max-xl:gap-[12px] max-xl:flex-col max-xl:h-auto">
                     <Link href="/" onClick={closeMenu}>
                         <Image
@@ -47,7 +38,7 @@ export default function Header() {
                     </Link>
                 </div>
 
-                {/* Кнопка бургер-меню */}
+                {/* Кнопка бургер / крестик */}
                 <div className="hidden max-lg:block z-60">
                     <button
                         onClick={toggleMenu}
@@ -88,41 +79,10 @@ export default function Header() {
                         ))}
                     </ul>
                 </nav>
-
-                {/* Мобильное меню */}
-                {isMenuOpen && (
-                    <div className="fixed inset-0 bg-black z-40 pt-[120px] px-4 lg:hidden">
-                        <nav className="flex flex-col items-center gap-[20px] text-[16px] uppercase w-full">
-                            <ul className="flex flex-col items-center gap-[20px] w-full">
-                                {navLinks.map((link, index) => (
-                                    <li key={index} className="w-full text-center py-2">
-                                        <Link
-                                            href={link.href}
-                                            className={`block w-full py-2 border-b border-transparent transition ${
-                                                link.isAccent
-                                                    ? "text-[var(--accent-2)] hover:border-[var(--accent-2)]"
-                                                    : "text-white hover:border-white"
-                                            }`}
-                                            onClick={closeMenu}
-                                        >
-                                            {link.label}
-                                        </Link>
-                                    </li>
-                                ))}
-                                <li className="w-full text-center py-2 mt-4">
-                                    <Link
-                                        href="tel:+7800600-35-38"
-                                        className="block w-full text-[var(--accent-2)] border-b border-transparent hover:border-[var(--accent-2)] transition py-2"
-                                        onClick={closeMenu}
-                                    >
-                                        +7 (800) 600-35-38
-                                    </Link>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                )}
             </Container>
+
+            {/* Мобильное меню (без кнопки закрытия внутри) */}
+            <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} />
         </header>
     )
 }

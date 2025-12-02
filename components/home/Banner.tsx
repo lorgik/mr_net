@@ -1,7 +1,4 @@
-import Image from "next/image"
-import Container from "../Container"
-import Button from "../../ui/Button"
-import Link from "next/link"
+import Button from "@/ui/Button"
 
 export default function Banner() {
     const list = [

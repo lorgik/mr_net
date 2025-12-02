@@ -2,8 +2,8 @@
 
 import Image from "next/image"
 import { useState, useRef, useEffect } from "react"
-import { ArrowLeft } from "@/public/icons/ArrowLeft"
-import { ArrowRight } from "@/public/icons/ArrowRight"
+import { ArrowLeft } from "@/icons/ArrowLeft"
+import { ArrowRight } from "@/icons/ArrowRight"
 
 const reviews = [
     {
