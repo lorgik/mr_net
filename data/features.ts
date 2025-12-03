@@ -1,5 +1,13 @@
-// data/features.ts
-export const features = [
+interface Feature {
+  id: number;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  title: string;
+}
+
+export const features: Feature[] = [
   {
     id: 1,
     src: '/wifi.svg',

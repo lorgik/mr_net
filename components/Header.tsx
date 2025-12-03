@@ -29,13 +29,13 @@ export default function Header() {
               priority
             />
           </Link>
-          <Link
+          <a
             href="tel:+7800600-35-38"
             className="text-[var(--accent-2)] border-b border-transparent hover:border-[var(--accent-2)] transition flex-shrink-0 max-lg:text-[14px]"
             onClick={closeMenu}
           >
             +7 (800) 600-35-38
-          </Link>
+          </a>
         </div>
 
         {/* Кнопка бургер / крестик */}

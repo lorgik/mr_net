@@ -7,6 +7,7 @@ interface SliderNavigationProps {
   onPrev: () => void;
   onNext: () => void;
   onDotClick: (index: number) => void;
+  className?: string;
 }
 
 export const SliderNavigation = ({
@@ -15,8 +16,9 @@ export const SliderNavigation = ({
   onPrev,
   onNext,
   onDotClick,
+  className,
 }: SliderNavigationProps) => (
-  <div className="flex justify-between items-center mt-4">
+  <div className={`flex justify-between items-center ${className}`}>
     <button
       onClick={onPrev}
       className="flex justify-center items-center border border-[var(--accent-2)] rounded-full w-[52px] h-[52px]"
