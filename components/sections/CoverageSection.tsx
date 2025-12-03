@@ -2,9 +2,8 @@ import Container from '@/components/Container';
 import { cities, City } from '@/data/coverage';
 import Title from '@/ui/Title';
 import Image from 'next/image';
-import Link from 'next/link';
 
-const CityPoint = ({ city, index }: { city: City; index: number }) => (
+const CityPoint = ({ index }: { index: number }) => (
   <div className="bg-white h-[12px] aspect-square max-lg:h-[20px] flex items-center justify-center max-lg:bg-[var(--accent-2)]">
     <span className="hidden max-lg:block text-black">{index + 1}</span>
   </div>
@@ -23,9 +22,7 @@ const CityInfo = ({ city }: { city: City }) => (
 
 const MobileCityCard = ({ city, index }: { city: City; index: number }) => (
   <div className="text-[16px] text-white flex items-start gap-[10px] ml-[12px] font-medium">
-    <div className="bg-white h-[12px] aspect-square max-lg:h-[20px] flex items-center justify-center max-lg:bg-[var(--accent-2)]">
-      <span className="hidden max-lg:block text-black">{index + 1}</span>
-    </div>
+    <CityPoint index={index} />
     <div className="flex flex-col gap-[5px]">
       <span>{city.name}</span>
       <a href={`tel:${city.phone}`}>{city.phoneDisplay}</a>
@@ -92,13 +89,13 @@ export default function CoverageSection() {
               <div key={city.name} className="absolute" style={city.position}>
                 {city.dotAtStart ? (
                   <>
-                    <CityPoint city={city} index={index} />
+                    <CityPoint index={index} />
                     <CityInfo city={city} />
                   </>
                 ) : (
                   <>
                     <CityInfo city={city} />
-                    <CityPoint city={city} index={index} />
+                    <CityPoint index={index} />
                   </>
                 )}
               </div>
