@@ -1,25 +1,25 @@
-import MainSection from "@/components/home/MainSection"
-import ClientsSection from "@/components/home/ClientsSection"
-import TechnologySection from "@/components/home/TechnologySection"
-import ComparisonSection from "@/components/home/ComparisonSection"
-import MonitoringSection from "@/components/home/MonitoringSection"
-import SolutionSection from "@/components/home/SolutionSection"
-import ReviewsSection from "@/components/home/ReviewsSection"
-import CoverageSection from "@/components/home/CoverageSection"
-import ContactSection from "@/components/home/ContactSection"
+import MainSection from '@/components/sections/MainSection';
+import ClientsSection from '@/components/sections/ClientsSection';
+import TechnologySection from '@/components/sections/TechnologySection';
+import ComparisonSection from '@/components/sections/ComparisonSection';
+import MonitoringSection from '@/components/sections/MonitoringSection';
+import SolutionSection from '@/components/sections/SolutionSection';
+import ReviewsSection from '@/components/sections/ReviewsSection';
+import CoverageSection from '@/components/sections/CoverageSection';
+import ContactSection from '@/components/sections/ContactSection';
 
-export default function Home() {
-    return (
-        <>
-            <MainSection />
-            <ClientsSection />
-            <TechnologySection />
-            <ComparisonSection />
-            <MonitoringSection />
-            <SolutionSection />
-            <ReviewsSection />
-            <CoverageSection />
-            <ContactSection />
-        </>
-    )
+export default function sections() {
+  return (
+    <>
+      <MainSection />
+      <ClientsSection />
+      <TechnologySection />
+      <ComparisonSection />
+      <MonitoringSection />
+      <SolutionSection />
+      <ReviewsSection />
+      <CoverageSection />
+      <ContactSection />
+    </>
+  );
 }

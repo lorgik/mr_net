@@ -1,109 +1,124 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import ConsentCheckbox from "./ConsentCheckbox"
-import PhoneInput from "./PhoneInput"
-import Button from "@/ui/Button"
-import NameInput from "./NameInput"
+import { useState } from 'react';
+import ConsentCheckbox from './ConsentCheckbox';
+import PhoneInput from './PhoneInput';
+import Button from '@/ui/Button';
+import NameInput from './NameInput';
 
-const VALIDATION = {
-    PHONE_LENGTH: 18,
-    MESSAGES: {
-        NAME_REQUIRED: "Пожалуйста, введите имя",
-        PHONE_REQUIRED: "Пожалуйста, введите полный номер телефона",
-        CONSENT_REQUIRED: "Необходимо дать согласие",
-    },
-} as const
+const validation = {
+  phoneLength: 18,
+  messages: {
+    nameRequired: 'Пожалуйста, введите имя',
+    phoneRequired: 'Пожалуйста, введите полный номер телефона',
+    consentRequired: 'Необходимо дать согласие',
+  },
+} as const;
 
 const ErrorMessage = ({ message }: { message: string }) => (
-    <div className="text-[var(--accent-1)] text-[14px] ml-[24px]">{message}</div>
-)
+  <div className="text-[var(--accent-1)] text-[14px] ml-[24px]">{message}</div>
+);
 
 interface ContactFormProps {
-    onSuccess?: () => void
+  onSuccess?: () => void;
 }
 
 export default function ContactForm({ onSuccess }: ContactFormProps) {
-    const [isSubmitted, setIsSubmitted] = useState(false)
-    const [isSuccess, setIsSuccess] = useState(false)
-    const [name, setName] = useState("")
-    const [phone, setPhone] = useState("")
-    const [tg, setTg] = useState("")
-    const [consentChecked, setConsentChecked] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [tg, setTg] = useState('');
+  const [consentChecked, setConsentChecked] = useState(false);
 
-    const isNameValid = name.trim() !== ""
-    const isPhoneValid = phone.length === VALIDATION.PHONE_LENGTH
-    const isFormValid = isNameValid && isPhoneValid && consentChecked
+  const isNameValid = name.trim() !== '';
+  const isPhoneValid = phone.length === validation.phoneLength;
+  const isFormValid = isNameValid && isPhoneValid && consentChecked;
 
-    const showNameError = isSubmitted && !isNameValid
-    const showPhoneError = isSubmitted && !isPhoneValid
-    const showConsentError = isSubmitted && !consentChecked
+  const showNameError = isSubmitted && !isNameValid;
+  const showPhoneError = isSubmitted && !isPhoneValid;
+  const showConsentError = isSubmitted && !consentChecked;
 
-    const resetForm = () => {
-        setName("")
-        setPhone("")
-        setTg("")
-        setConsentChecked(false)
-        setIsSubmitted(false)
-    }
+  const resetForm = () => {
+    setName('');
+    setPhone('');
+    setTg('');
+    setConsentChecked(false);
+    setIsSubmitted(false);
+  };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        setIsSubmitted(true)
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitted(true);
 
-        if (!isFormValid) return
+    if (!isFormValid) return;
 
-        setIsSuccess(true)
+    setIsSuccess(true);
+    onSuccess?.();
+    resetForm();
+  };
 
-        onSuccess?.()
+  const handleTgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTg(e.target.value);
+  };
 
-        resetForm()
-    }
-
-    const handleTgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTg(e.target.value)
-    }
-
-    if (isSuccess) {
-        return (
-            <div className="flex flex-col items-center justify-center text-center p-8 min-h-[400px]">
-                <div className="text-[24px] font-medium mb-4">Спасибо за заявку!</div>
-                <p className="text-[18px] text-[var(--neutral)]">
-                    Наши менеджеры уже взяли её в работу и скоро свяжутся с вами.
-                </p>
-            </div>
-        )
-    }
-
+  if (isSuccess) {
     return (
-        <form className="flex flex-col gap-[12px] mt-[20px] text-[18px]" onSubmit={handleSubmit} noValidate>
-            <NameInput value={name} onChange={setName} isSubmitted={isSubmitted} />
-            {showNameError && <ErrorMessage message={VALIDATION.MESSAGES.NAME_REQUIRED} />}
+      <div className="flex flex-col items-center justify-center text-center p-8 min-h-[400px]">
+        <div className="text-[24px] font-medium mb-4">Спасибо за заявку!</div>
+        <p className="text-[18px] text-[var(--neutral)]">
+          Наши менеджеры уже взяли её в работу и скоро свяжутся с вами.
+        </p>
+      </div>
+    );
+  }
 
-            <label className="ml-[24px] my-[4px]" htmlFor="tg">
-                Оставьте ваши контакты
-            </label>
+  return (
+    <form
+      className="flex flex-col gap-[12px] mt-[20px] text-[18px]"
+      onSubmit={handleSubmit}
+      noValidate
+    >
+      <NameInput value={name} onChange={setName} isSubmitted={isSubmitted} />
+      {showNameError && (
+        <ErrorMessage message={validation.messages.nameRequired} />
+      )}
 
-            <PhoneInput value={phone} onChange={setPhone} isSubmitted={isSubmitted} />
-            {showPhoneError && <ErrorMessage message={VALIDATION.MESSAGES.PHONE_REQUIRED} />}
+      <label className="ml-[24px] my-[4px]" htmlFor="tg">
+        Оставьте ваши контакты
+      </label>
 
-            <input
-                type="text"
-                name="tg"
-                value={tg}
-                onChange={handleTgChange}
-                placeholder="Ваш ник в tg"
-                className="w-full px-[24px] py-[12px] bg-black rounded-full border border-[var(--accent-2)] focus:outline-none focus:border-[var(--accent-2)]"
-            />
+      <PhoneInput value={phone} onChange={setPhone} isSubmitted={isSubmitted} />
+      {showPhoneError && (
+        <ErrorMessage message={validation.messages.phoneRequired} />
+      )}
 
-            <ConsentCheckbox required checked={consentChecked} onChange={setConsentChecked} isSubmitted={isSubmitted} />
-            {showConsentError && <ErrorMessage message={VALIDATION.MESSAGES.CONSENT_REQUIRED} />}
+      <input
+        type="text"
+        name="tg"
+        value={tg}
+        onChange={handleTgChange}
+        placeholder="Ваш ник в tg"
+        className="w-full px-[24px] py-[12px] bg-black rounded-full border border-[var(--accent-2)] focus:outline-none focus:border-[var(--accent-2)]"
+      />
 
-            <span className="text-[var(--neutral)] text-[12px]">* Поля, обязательные для заполнения</span>
+      <ConsentCheckbox
+        required
+        checked={consentChecked}
+        onChange={setConsentChecked}
+        isSubmitted={isSubmitted}
+      />
+      {showConsentError && (
+        <ErrorMessage message={validation.messages.consentRequired} />
+      )}
 
-            <Button type="submit" variant="gradient" className="mt-[12px]">
-                Начать!
-            </Button>
-        </form>
-    )
+      <span className="text-[var(--neutral)] text-[12px]">
+        * Поля, обязательные для заполнения
+      </span>
+
+      <Button type="submit" variant="gradient" className="mt-[12px]">
+        Начать!
+      </Button>
+    </form>
+  );
 }
