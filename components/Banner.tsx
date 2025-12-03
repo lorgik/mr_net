@@ -12,13 +12,17 @@ export default function Banner() {
       <div className="flex flex-col gap-[20px] flex-[793] rounded-[8px] bg-gradient-1 border border-[var(--accent-1)] p-[20px]">
         <h1 className="text-[50px] max-sm:text-[35px]">{title}</h1>
 
-        <PriceDisplay amount={price.amount} note={price.note} />
+        <PriceDisplay amount={price.amount} />
 
         <Button href={cta.href} className="my-[20px]">
           {cta.text}
         </Button>
 
         <BulletList items={benefits} />
+
+        <p className="text-[12px] text-balance text-[var(--neutral)]">
+          {price.note}
+        </p>
       </div>
 
       <BackgroundImage />
