@@ -21,14 +21,14 @@ const ContactSection = () => {
                 </div>
 
                 <div
-                    className="flex flex-col rounded-[8px] border border-[var(--accent-2)] p-[20px]"
+                    className="flex flex-col rounded-[8px] border border-[var(--accent-2)] p-[20px] min-h-[459px]"
                     style={{
                         background: "linear-gradient(223deg, var(--accent-2), #000000 44%)",
                     }}
                 >
                     {isFormSubmitted ? (
                         <>
-                            <h4 className="text-[45px] max-sm:text-[35px]">
+                            <h4 className="text-[45px] max-sm:text-[35px] text-balance">
                                 Спасибо за заявку! Наши менеджеры уже взяли её в работу и скоро свяжутся с вами.
                             </h4>
                         </>
